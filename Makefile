@@ -19,7 +19,10 @@ sqlc-win:
 sqlc:
 	sqlc generate
 
+opendb:
+	docker exec -it postgres12 psql -U root simple_bank
+
 test:
 	go test -v -cover ./...
 
-.PHONY: postgres createdb dropdb migrateup migratedown sqlc
+.PHONY: postgres createdb dropdb migrateup migratedown sqlc opendb
