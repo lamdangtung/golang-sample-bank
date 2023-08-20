@@ -21,8 +21,9 @@ sqlc:
 
 opendb:
 	docker exec -it postgres12 psql -U root simple_bank
-
+server:
+	go run main.go
 test:
 	go test -v -cover ./...
 
-.PHONY: postgres createdb dropdb migrateup migratedown sqlc opendb
+.PHONY: postgres createdb dropdb migrateup migratedown sqlc opendb server
