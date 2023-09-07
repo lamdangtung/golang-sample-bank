@@ -238,6 +238,21 @@ func TestCreateAccountAPI(t *testing.T) {
 	}
 }
 
+// TODO: Need to update
+func TestUpdateAccountAPI(t *testing.T) {
+
+}
+
+// TODO: Need to update
+func TestDeleteAccountAPI(t *testing.T) {
+
+}
+
+// TODO: Need to update
+func TestListAccountAPI(t *testing.T) {
+
+}
+
 func randomAccount() db.Account {
 	return db.Account{
 		ID:       util.RandomInt(1, 1000),
