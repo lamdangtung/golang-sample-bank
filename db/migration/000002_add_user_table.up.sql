@@ -9,5 +9,5 @@ CREATE TABLE "users" (
 
 ALTER TABLE "accounts" ADD FOREIGN KEY ("owner") REFERENCES "users" ("username");
 
-CREATE INDEX ON "accounts" ("owner", "currency");
+CREATE UNIQUE INDEX ON "accounts" ("owner", "currency");
 
