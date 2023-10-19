@@ -57,3 +57,7 @@ func RandomEmail() string {
 func RandomHashedPassword() string {
 	return RandomString(32)
 }
+
+func RandomPassword() string {
+	return RandomString(6)
+}
