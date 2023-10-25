@@ -8,6 +8,7 @@ import (
 )
 
 const alphabet = "abcdefghijklmnopqrstuvwxyz"
+const numberics = "0123456789"
 
 func init() {
 	rand.Seed(time.Now().UnixNano())
@@ -43,7 +44,7 @@ func RandomCurrency() string {
 }
 
 func RandomUsername() string {
-	return RandomString(12)
+	return fmt.Sprintf(`%v%v`, RandomString(12), RandomInt(0, 10))
 }
 
 func RandomFullname() string {
@@ -51,7 +52,7 @@ func RandomFullname() string {
 }
 
 func RandomEmail() string {
-	return fmt.Sprintf("%s@%s", RandomString(6), RandomString(6))
+	return fmt.Sprintf("%s@gmail.com", RandomString(6))
 }
 
 func RandomHashedPassword() string {
