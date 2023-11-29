@@ -92,7 +92,7 @@ func TestGetAccountAPI(t *testing.T) {
 			tc.buildStubs(store)
 
 			// start test server and send request
-			server := NewServer(store)
+			server := NewTestServer(t, store)
 			recorder := httptest.NewRecorder()
 
 			// start make request
@@ -221,7 +221,7 @@ func TestCreateAccountAPI(t *testing.T) {
 			tc.buildStubs(store)
 
 			// start make request
-			server := NewServer(store)
+			server := NewTestServer(t, store)
 			recorder := httptest.NewRecorder()
 
 			data, err := json.Marshal(tc.body)
@@ -357,7 +357,7 @@ func TestListAccountAPI(t *testing.T) {
 			tc.buildStubs(store, t)
 
 			// initialize Server,Recorder
-			server := NewServer(store)
+			server := NewTestServer(t, store)
 			recorder := httptest.NewRecorder()
 
 			// initialize request
