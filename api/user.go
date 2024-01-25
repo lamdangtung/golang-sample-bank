@@ -124,11 +124,25 @@ func (server *Server) loginUser(ctx *gin.Context) {
 		return
 	}
 
+	session, err := server.store.CreateSession(ctx, db.CreateSessionParams{
+		ID:           refreshPayload.ID,
+		Username:     refreshPayload.Username,
+		UserAgent:    ctx.Request.UserAgent(),
+		ClientIp:     ctx.ClientIP(),
+		IsBlocked:    false,
+		ExpiredAt:    refreshPayload.ExpiredAt,
+		RefreshToken: refreshToken,
+	})
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
+
 	res := loginUserResponse{
 		AccessToken:           accessToken,
 		AccessTokenExpiredAt:  accessPayload.ExpiredAt,
-		RefreshToken:          refreshToken,
-		RefreshTokenExpiredAt: refreshPayload.ExpiredAt,
+		RefreshToken:          session.RefreshToken,
+		RefreshTokenExpiredAt: session.ExpiredAt,
 		User:                  NewUserResponse(user),
 	}
 
