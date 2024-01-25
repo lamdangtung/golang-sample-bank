@@ -4,7 +4,7 @@ import "time"
 
 type Maker interface {
 	/// CreateToken create token for specified username and duration
-	CreateToken(username string, duration time.Duration) (string, error)
+	CreateToken(username string, duration time.Duration) (string, *Payload, error)
 	/// VerifyToken checks if the token is valid or invalid
 	VerifyToken(token string) (*Payload, error)
 }
