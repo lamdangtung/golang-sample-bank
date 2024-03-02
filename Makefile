@@ -36,6 +36,12 @@ mock:
 build-image:
 	docker build -t sample-bank:latest -f Dockerfile .
 
+db_docs:
+	dbdocs build docs/db.dbml
+
+db_schema:
+	dbml2sql docs\db.dbml -o docs\db.sql
+
 sample-bank: 
 	docker run --name sample-bank --network sample-bank-network -e GIN_MODE=release -e DB_SOURCE="postgresql://root:123456@postgres12:5432/simple_bank?sslmode=disable" -p 8080:8080 sample-bank:latest
-.PHONY: postgres createdb dropdb migrateup migratedown migrateup1 migratedown1 sqlc opendb server mock build-image sample-bank
+.PHONY: postgres createdb dropdb migrateup migratedown migrateup1 migratedown1 sqlc opendb server mock build-image sample-bank db_docs db_schema
