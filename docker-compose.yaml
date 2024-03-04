@@ -8,6 +8,11 @@ services:
       - POSTGRES_DB=simple_bank
     ports:
       - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
   
   pgadmin:
     image: dpage/pgadmin4:8.2
@@ -27,7 +32,8 @@ services:
       - DB_SOURCE=postgresql://root:123456@postgres:5432/simple_bank?sslmode=disable
       - GIN_MODE=release
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     entrypoint: ["./wait-for.sh", "postgres:5432","--", "./start.sh"]
     command: ["./main"]
           
