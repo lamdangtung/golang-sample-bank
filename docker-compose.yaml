@@ -1,4 +1,4 @@
-version: "3.9"
+version: "3"
 services:
   postgres:
     image: postgres:12-alpine
@@ -28,6 +28,6 @@ services:
       - GIN_MODE=release
     depends_on:
       - postgres
-    entrypoint: ["./wait-for.sh", "postgres:5432","--", "/app/start.sh"]
+    entrypoint: ["./wait-for.sh", "postgres:5432","--", "./start.sh"]
     command: ["./main"]
           
