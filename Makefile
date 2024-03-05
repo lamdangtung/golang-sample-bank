@@ -44,4 +44,11 @@ db_schema:
 
 sample-bank: 
 	docker run --name sample-bank --network sample-bank-network -e GIN_MODE=release -e DB_SOURCE="postgresql://root:123456@postgres12:5432/simple_bank?sslmode=disable" -p 8080:8080 sample-bank:latest
-.PHONY: postgres createdb dropdb migrateup migratedown migrateup1 migratedown1 sqlc opendb server mock build-image sample-bank db_docs db_schema
+
+proto:
+	rm -f pb/*.proto
+	protoc --proto_path=proto --go_out=pb --go_opt=paths=source_relative \
+    --go-grpc_out=pb --go-grpc_opt=paths=source_relative \
+    proto/*.proto
+
+.PHONY: postgres createdb dropdb migrateup migratedown migrateup1 migratedown1 sqlc opendb server mock build-image sample-bank db_docs db_schema proto
